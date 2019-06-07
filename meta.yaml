@@ -5,10 +5,10 @@ description: |-2
   This lecture demonstrates features of LMSX and describes how to use it.
 
 tags:
-  - groupA
-  - groupB
-  - groupC
-  - groupD
+  groupA: Annotate that a user belongs the group A
+  groupB: Annotate that a user belongs the group B
+  groupC: Annotate that a user belongs the group C
+  groupD: Annotate that a user belongs the group D
 
 global_variables:
 
