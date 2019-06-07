@@ -5,7 +5,7 @@ description: |-2
   <% if @language == 'Japanese' %>
   次の問に答えよ．
   <% end %>
-  <% if @language == 'Japanese' %>
+  <% if @language == 'English' %>
   Answer following questions.
   <% end %>
 
