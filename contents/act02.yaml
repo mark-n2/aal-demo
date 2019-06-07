@@ -6,7 +6,7 @@ description: |-2
   `$N$` までの素数を出力する Ruby プログラムを作成せよ．
   <% end %>
   <% if @language == 'English' %>
-  The positive integer number `$N$ < 100` is given from the standard input.
+  The positive integer number `$N < 100$` is given from the standard input.
   Make a Ruby program that outputs prime numbers less than `$N$`.
   <% end %>
 
