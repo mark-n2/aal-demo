@@ -7,7 +7,7 @@ description: |-2
   次の連立方程式を解く Python のプログラムを Numpy を用いて作成せよ:
   <% end %>
   <% if @language == 'English' %>
-  Make a Python program with Numpy that solves the following simultaneous equation:
+  Make a Python program that solves the following simultaneous equation using Numpy:
   <% end %>
 
   ```math
