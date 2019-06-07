@@ -1,0 +1,86 @@
+title: ACT02
+working-dir: act02
+description: |-2
+  標準入力から正の整数 `$N \le 100$` が与えられる．
+  `$N$` までの素数を出力する Ruby プログラムを作成せよ．
+
+deadline: |-2
+  <% if @user.role != :teacher %>2019/04/31 19:00:00 JST<% end %>
+
+flags:
+  - use-markdown
+  #- no-run
+  #- no-validate
+  #- no-submit
+
+files:
+  - type: text
+    name: program.rb
+    title: プログラム
+    lang: ruby
+    default: |-2
+    answer: |-2
+      puts (2..STDIN.gets.to_i).reduce([]){|ps, i| ps.all?{|p| i % p != 0 } ? ps + [i] : ps }
+  - type: stdin
+    default: 20
+
+run:
+  image: ruby
+  limit:
+    time: 10
+    memory: 100mb
+  command: |-2
+    #!/bin/bash
+    cat stdin | ruby program.rb
+
+testcases:
+  - title: Test Case 01
+    command: |-2
+      cat > x <<EOM
+      2
+      3
+      5
+      7
+      11
+      13
+      17
+      19
+      EOM
+      echo 20 | ruby program.rb > y
+      c=`diff x y | wc -c`
+      ruby -e "puts $c == 0 ? 100 : 0"
+    border: 60/100
+  - title: Test Case 02
+    command: |-2
+      cat > x <<EOM
+      2
+      3
+      5
+      7
+      11
+      13
+      17
+      19
+      23
+      29
+      31
+      37
+      41
+      43
+      47
+      53
+      59
+      61
+      67
+      71
+      73
+      79
+      83
+      89
+      97
+      EOM
+      echo 100 | ruby program.rb > y
+      c=`diff x y | wc -c`
+      ruby -e "puts $c == 0 ? 100 : 0"
+    border: 60/100
+

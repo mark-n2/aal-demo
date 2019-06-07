@@ -1,0 +1,407 @@
+# コンテンツ例
+
+機械学習の目的は，ある入力を与えればそれにふさわしい出力が得られるシステムを，多量のデータに基づいて自動的に構成することである．
+教師あり学習と分類される機械学習では，
+入力（訓練データ）とそのふさわしい出力（教師データ）の組（学習データ）を手がかりに，
+システムの内部パラメータを徐々に適切なものに変化（学習）させていく．
+多量で多様な学習データを用いてうまく学習させることで，
+未知の入力データに対しても，適切な出力が得られるようになる．
+
+## 問題設定
+
+入力データおよび出力データとしてあり得る集合を `$\mathcal{X} \subset \mathbb{R}^{N^1} $` 
+および `$\mathcal{Y} \subset \mathbb{R}^{N^L} $` とする．
+`$N^1, N^L$` はそれぞれ入力データ，出力データを表現する実数の個数である．
+
+例えば，サイノグラムを入力するとその再構成画像が得られるような機械学習システムでは，
+`$N^1$` はサイノグラムの画素数，`$N^L$` は再構成画像の画素数となる．
+
+---
+
+このページでは，下図のような，入力層と出力層も含めて `$L$` 層の全結合層で構成したニューラルネットワークについて考える．
+
+![NN](<%= file_url('NeuralNetwork.png') %> "ニューラルネットワーク")
+
+---
+
+図中の `$b^\ell$` および `$W^{\ell}$` (`$\ell=1,2,\dots,L-1$`) をそれぞれ *バイアス (bias)* および *重み係数 (weight)* という．
+
+バイアス `$b^\ell$` は `$N^{\ell+1}$` 個の要素をもつ実数ベクトルである:
+
+```math
+b^{\ell} = \left(\begin{array}{c}
+  b^\ell_1 \\ b^\ell_2 \\ \vdots \\ b^\ell_{N^{\ell+1}}
+\end{array}\right) \in \mathbb{R}^{N^{\ell+1}}.
+```
+
+重み係数 `$W^\ell$` は `$N^{\ell+1} \times N^{\ell}$` の実数行列である:
+
+```math
+W^\ell = \left(\begin{array}{cccc}
+  w_{1,1} & w_{1,2} & \dots & w_{1,N^{\ell}} \\
+  w_{2,1} & w_{2,2} & \dots & w_{2,N^{\ell}} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  w_{N^{\ell+1},1} & w_{N^{\ell+1},2} & \dots & w_{N^{\ell+1},N^{\ell}} \\
+\end{array}\right) \in \mathbb{R}^{N^{\ell+1} \times N^{\ell}}.
+```
+
+バイアスと重み係数をあわせてニューラルネットワークの *パラメータ (parameter)* と呼ぶ．
+
+---
+
+`$\ell$` 番目の層について，バイアスによる出力を除いた `$N^\ell$` 個の出力を縦に並べたベクトルを
+
+```math
+z^\ell = \left(\begin{array}{c}
+  z^\ell_1 \\ z^\ell_2 \\ \vdots \\ z^\ell_{N^{\ell}}
+\end{array}\right) \in \mathbb{R}^{N^{\ell}}
+```
+
+と書くことにする．
+ベクトル `$z^1$` および `$z^L$` はニューラルネットワークの入力と出力に対応するベクトルである．
+
+`$\ell$` 番目の層の出力 `$z^\ell$` から次の層(`$\ell+1$` 番目の層)の出力 `$z^{\ell+1}$` は次式となる．
+
+```math
+  z^{\ell+1} = F^{\ell}(v^{\ell}) =
+  \left(\begin{array}{c}
+    f^{\ell}(v^{\ell}_1) \\
+    f^{\ell}(v^{\ell}_2) \\
+    \vdots \\
+    f^{\ell}(v^{\ell}_{N^{\ell+1}}) \\
+  \end{array}\right),~~
+  v^{\ell} := \left(\begin{array}{c}
+    v^{\ell}_1 \\
+    v^{\ell}_2 \\
+    \vdots \\
+    v^{\ell}_{N^{\ell+1}} \\
+  \end{array}\right) = \left(\begin{array}{c}
+    w^{\ell}_{1,1}z^{\ell}_1 + w^{\ell}_{1,2}z^{\ell}_2 + \dots + w^{\ell}_{1,N^{\ell}}z^{\ell}_{N^{\ell}} + b^{\ell}_1 \\
+    w^{\ell}_{2,1}z^{\ell}_1 + w^{\ell}_{2,2}z^{\ell}_2 + \dots + w^{\ell}_{2,N^{\ell}}z^{\ell}_{N^{\ell}} + b^{\ell}_2 \\
+    \vdots \\
+    w^{\ell}_{N^{\ell+1},1}z^{\ell}_1 + w^{\ell}_{N^{\ell+1},2}z^{\ell}_2 + \dots + w^{\ell}_{N^{\ell+1},N^{\ell}}z^{\ell}_{N^{\ell}} + b^{\ell}_{N^{\ell+1}} \\
+  \end{array}\right)
+  = W^{\ell} \cdot z^{\ell} + b^{\ell} \in \mathbb{R}^{N^{\ell+1}}
+  \tag{1}
+```
+
+ここに，`$f^{\ell}$` はアクティベーション関数と呼ばれる実数関数である．
+(アクティベーション関数は層毎に共通のものを用いるのが普通である．)
+アクティベーション関数として以下がよく用いられる:
+
+* シグモイド関数
+
+```math
+  {\rm sgm}(z^\ell_i) = \frac{1}{1 + \exp(-z^\ell_i)}
+```
+
+* tanh 関数
+
+```math
+  {\rm tanh}(z^\ell_i) = \frac{1 - \exp(-z^\ell_i)}{1 + \exp(-z^\ell_i)}
+```
+
+* ReLU 関数
+
+```math
+  {\rm ReLU}(z^\ell_i) = {\rm max}(z^\ell_i, 0)
+```
+
+* LeakyReLU 関数
+
+```math
+  {\rm LeakyReLU}(z^\ell_i) = {\rm max}(z^\ell_i, \alpha z^\ell_i), ~~0 < \alpha < 1
+```
+
+* softmax 関数
+
+```math
+  {\rm softmax}(z^\ell_i) = \frac{\exp{z^\ell_i}}{\displaystyle \sum_{k=1}^{N^{\ell}} \exp(z^\ell_k)}
+```
+
+* 恒等写像
+
+```math
+  {\rm identity}(z^\ell_i) = z^\ell_i
+```
+
+ここでは，アクティベーション関数として，すべての層でシグモイド関数を用いるものとする．
+
+---
+
+## 順伝播
+
+パラメータ
+
+```math
+  W := \left( W^1, W^2, \dots, W^{L-1} \right)
+```
+
+および
+
+```math
+  b := \left( b^1, b^2, \dots, b^{L-1} \right)
+```
+
+が与えられていたとする．
+
+入力データ `$x \in \mathcal{X}$` に対し，
+ニューラルネットワークでは，式(1)を反復的に用いて構成される関数
+
+```math
+  {\rm FP}(W, b, z^1) = G^L \circ G^{L-1} \circ \dots \circ G^1 (z^1) ~~~~\text{where} ~~~ G^\ell(x) := F^\ell\left(W^\ell \cdot z^\ell + b^\ell\right)
+```
+
+を用いて，出力の推定値
+
+```math
+  \hat{y} = {\rm FP}(W, b, x)
+ ```
+
+ を計算できる．
+
+この計算のことを *順伝播 (follow propagation)* という．
+
+
+---
+
+望ましい予測値を得るためには `$W, b$` を適切に与える必要がある．
+ただし，非線形関数 `${\rm FP}$` の 
+`$(N^2 \times N^1 + N^2) + (N^3 \times N^2 + N^3) + \dots + (N^L \times N^{L-1} + N^{L})$`
+個の実数変数を適切に設計するのは人手では困難であり，機械的な方法で決定する必要がある．
+
+---
+
+## 逆伝播
+
+多量の学習データをどのように活用して学習するのかにはいくつかの戦略があるが，このことについては授業にて解説する．
+どの学習戦略を用いるにせよ，本ページの以降で説明する，
+ある1組の学習データ `$(x,y) \in \mathcal{X} \times \mathcal{Y}$` が与えられたときに
+パラメータ `$W, b$` を少し改善する方法について，理解しておく必要がある．
+
+ニューラルネットワークの学習は，訓練データに対する推定値 `$\hat{y} = {\rm FP}(W, b, x)$` と 教師データ`$y$`
+との誤差を最小化させるようなパラメータ `$W, b$` を求める問題であるといえる．
+
+誤差（損失関数）を何と定義するかは，学習における重要な要素である．
+今回は，次に示す平均二乗誤差(mean square error)を用いることにしよう．
+
+```math
+  E(\hat{y}, y) = \frac{1}{2}\sum_{i}^{N^L} \hat{y}_{i} - y_{i}
+```
+
+誤差が小さくなるようにパラメータを更新する方法として，
+以下の式が基本的である:
+
+```math
+  w^\ell_{j,i} \mapsto w^\ell_{j,i} + \gamma \frac{\partial E(\hat{y}, y)}{\partial w^\ell_{j,i}},~~
+  b^\ell_{j} \mapsto b^\ell_{j} + \gamma \frac{\partial E(\hat{y}, y)}{\partial b^\ell_{j}},~~
+  (1 \le i \le N^{\ell},~1 \le j \le N^{\ell+1},~\ell=1, 2, \dots, L).
+  \tag{2}
+```
+
+ここに，`$\gamma$` は学習率と呼ばれるハイパーパラメータ(学習対象ではなく，設計者が設定しなければならない定数)である．
+標準的には `$\gamma=0.01 $` が用いられる．反復回数によって減衰させるなどの工夫をする場合もある．
+
+式(2)によるパラメータの更新方法は確率的勾配降下法と呼ばれる．
+このほかにも更新方法（optimizer）が開発されており，
+どの optimizer を使うかによって，学習の性能が大きく変わる．
+(実際の学習には，Adam という optimizer を使うのが無難である．)
+
+---
+
+optimizer にはバリエーションがあるが，いずれの optimizer を用いるにせよ，偏微分値 `$\partial E(\hat{y}, y)/\partial w^\ell_{j,i}$`，`$\partial E(\hat{y}, y)/\partial b^\ell_{j}$` を計算せねばならない．
+
+まず，`$\partial E(\hat{y}, y)/\partial w^{L-1}_{1,1}$` を求める方法について説明しよう．
+この偏微分は
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial w^{L-1}_{1,1}} =
+    \frac{\partial E(\hat{y}, y)}{\partial \hat{y}_1}
+    \frac{\partial \hat{y}_1}{\partial v^{L-1}_1}
+    \frac{\partial v^{L-1}_1}{\partial w^{L-1}_{1,1}}
+  \tag{3}
+```
+
+と変形できる．
+右辺の1つめ偏微分は，平均二乗誤差の `$\hat{y}_1$` の偏微分であり，簡単に計算できる:
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial \hat{y}_1} = \hat{y}_1 - y_1.
+```
+
+3つ目の偏微分については，
+
+```math
+  v^{L-1}_1 = w^{L-1}_{1,1}z^{L-1}_1 + w^{L-1}_{1,2}z^{L-1}_2 + \dots + w^{L-1}_{1,N^{L-1}}z^{L-1}_{N^{L-1}} + b^{L-1}_1
+```
+  
+の関係から，
+
+```math
+  \frac{\partial v^{L-1}_1}{\partial w^{L-1}_{1,1}} = z^{L-1}_1
+```
+
+と計算できる．
+
+2つ目の偏微分は，`$\hat{y}_1 = f^{L-1}(v^{L-1}_1)$` であることから，
+
+```math
+  \frac{\partial \hat{y}_1}{\partial v^{L-1}_1} = \frac{\partial f^{L-1}(v^{L-1}_1)}{\partial v^{L-1}_1}
+```
+
+となり，活性化関数の微分がわかっているならば計算することができる．
+シグモイド関数であれば，その微分は，
+
+```math
+  {\rm sgm}'(x) = {\rm sgm}(x)(1 - {\rm sgm}(x))
+```
+
+であり，
+
+```math
+{\rm sgm}(v^{L-1}_1) = z^{L}_1
+```
+
+なので，今回の場合は，
+
+```math
+  \frac{\partial \hat{y}_1}{\partial v^{L-1}_1} = \frac{\partial f^{L-1}(v^{L-1}_1)}{\partial v^{L-1}_1}
+  = z^{L}_1(1-z^{L}_1)
+```
+
+である．
+
+結局，式(3)は，以下となる:
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial w^{L-1}_{1,1}} = (\hat{y}_1 - y_1) \hat{y}_1(1-\hat{y}_1) z^{L-1}_1.
+```
+
+任意の `$1 \le i \le N^{L-1}$`, `$1 \le j \le N^{L}$` に対して，同様に，
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial w^{L-1}_{j,i}} =
+    \frac{\partial E(\hat{y}, y)}{\partial \hat{y}_j}
+    \frac{\partial \hat{y}_j}{\partial v^{L-1}_j}
+    \frac{\partial v^{L-1}_j}{\partial w^{L-1}_{j,i}}
+  = (\hat{y}_j - y_j) \hat{y}_j(1-\hat{y}_j) z^{L-1}_i.
+  \tag{4}
+```
+
+バイアスについても同様に考えることができる．
+バイアスの場合，
+
+```math
+  \frac{\partial v^{L-1}_i}{\partial b^{L-1}_{j}} = 1
+```
+
+であるので，
+
+```math
+ \frac{\partial E(\hat{y}, y)}{\partial b^{L-1}_{j}} =
+    \frac{\partial E(\hat{y}, y)}{\partial \hat{y}_j}
+    \frac{\partial \hat{y}_j}{\partial v^{L-1}_j}
+    \frac{\partial v^{L-1}_j}{\partial b^{L-1}_{j}}
+ = (\hat{y}_j - y_j) \hat{y}_j(1-\hat{y}_j)
+```
+
+となる．
+
+---
+
+`$1 \le \ell < L-1$` について，偏微分 `$\partial E(\hat{y}, y)/ \partial w^{\ell}_{j,i}$` および `$\partial E(\hat{y}, y) / \partial b^{\ell}_{j}$` (`$1 \le i \le N^{\ell},~1 \le j \le N^{\ell+1}$`) を求める方法を説明する．
+
+まず，`$\partial E(\hat{y}, y)/ \partial w^{\ell}_{j,i}$` は，
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial w^{\ell}_{j,i}} =
+    \frac{\partial E(\hat{y}, y)}{\partial v^{\ell}_{j}}
+    \frac{\partial v^{\ell}_j}{\partial w^{\ell}_{j,i}}
+  \tag{5}
+```
+
+と変形できる．
+
+右辺の2つ目の偏微分は，式(3)のときと同様に，
+
+```math
+  \frac{\partial v^{\ell}_j}{\partial w^{\ell}_{j,i}} = z^{\ell}_i
+```
+
+となる．
+
+右辺の1つ目の偏微分は次式の通り変形できる．
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial v^{\ell}_j} = 
+    \sum_{k}^{N^{\ell+1}}
+      \frac{\partial E(\hat{y}, y)}{\partial v^{\ell+1}_k}
+      \frac{\partial v^{\ell+1}_k}{\partial v^{\ell+1}_j} = 
+    \frac{\partial E(\hat{y}, y)}{\partial v^{\ell+1}_1} \frac{\partial v^{\ell+1}_1}{\partial v^{\ell}_j}
+    + \frac{\partial E(\hat{y}, y)}{\partial v^{\ell+1}_2} \frac{\partial v^{\ell+1}_2}{\partial v^{\ell}_j}
+    + \dots
+    + \frac{\partial E(\hat{y}, y)}{\partial v^{\ell+1}_{N^{\ell+1}}} \frac{\partial v^{\ell+1}_{N^{\ell+1}}}{\partial v^{\ell}_j}
+    \tag{6}
+```
+
+ここで，`$v^{\ell+1}_k = \sum^{\ell}_{j'} w^{\ell+1}_{k,j'} f^{\ell}(v^{\ell}_{j'})$` より，
+
+```math
+\frac{\partial v^{\ell+1}_k}{\partial v^{\ell}_j} = w^{\ell+1}_{k,j} \frac{\partial f^{\ell}(v^{\ell}_{j})}{\partial v^{\ell}_{j}}
+```
+
+である．
+従って，式(6)は，
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial v^{\ell}_j} =
+    \frac{\partial f^{\ell}(v^{\ell}_{j})}{\partial v^{\ell}_{j}}
+    \sum_{k}^{N^{\ell+1}}
+      w^{\ell+1}_{k,j} 
+      \frac{\partial E(\hat{y}, y)}{\partial v^{\ell+1}_k}
+  =: \delta^\ell_j
+```
+
+となる．
+
+さて，`$\ell+1$` 番目の層(注目している層の右側の層)における各偏微分を既に計算しているのであれば，
+その計算途中で 
+
+````math
+  \delta^{\ell+1}_k = \frac{\partial E(\hat{y}, y)}{\partial v^{\ell+1}_k},~k=1,2,\dots,N^{\ell+1}
+```
+
+を計算しているはずである．この計算結果を再利用することにして，
+
+```math
+  \delta^\ell_j =
+  \frac{\partial E(\hat{y}, y)}{\partial v^{\ell}_j} =
+    \frac{\partial f^{\ell}(v^{\ell}_{j})}{\partial v^{\ell}_{j}}
+    \sum_{k}^{N^{\ell+1}}
+      w^{\ell+1}_{k,j} 
+      \delta^{\ell+1}_k
+```
+
+と書き換えることができる．
+
+結局，式(5)は，
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial w^{\ell}_{j,i}} = z^{\ell}_i \delta^{\ell}_{j}
+```
+
+となる．
+
+バイアスについても同様に，
+
+```math
+  \frac{\partial E(\hat{y}, y)}{\partial b^{\ell}_{j}} = \delta^{\ell}_{j}
+```
+
+となる．
+
+以上のように，optimizer に必要な各偏微分値は ニューラルネットワークを逆方向（右側から左側）に計算していくことで，容易に求めることができる．
+この手続きを *(誤差)逆伝播 (back propagation)* という．
+
+
+

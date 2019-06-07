@@ -1,0 +1,43 @@
+title: アクティビティのデモ1
+working-dir: 
+description: |-2
+  標準出力に `<%= @user.account %>` と表示する Ruby プログラムを作成せよ．
+
+
+deadline: 2020/05/31 19:00:00 JST
+
+flags:
+  - use-markdown
+#  - no-run
+#  - no-validate
+#  - no-submit
+
+files:
+  - type: text
+    name: program.rb
+    title: プログラム
+    lang: ruby
+    default: |-2
+    answer: |-2
+      puts "<%= @user.account %>"
+  - type: stdin
+    default: |-2
+  - type: args
+    default: |-2
+
+run:
+  image: ruby
+  limit:
+    time: 10
+    memory: 100mb
+  command: |-2
+    #!/bin/bash
+    cat stdin | ruby program.rb `cat args` 
+
+testcases:
+  - title: Test Case 01
+    command: |-2
+      #!/bin/bash
+      echo "dummy" | ruby program.rb | ruby -e "puts STDIN.read.chomp == \"<%= @user.account %>\" ? 100 : 0"
+    border: 100/60
+

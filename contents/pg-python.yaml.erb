@@ -1,0 +1,27 @@
+title: Python Playgroud
+working-dir:  playground-python
+description: |-2
+  自由に Python のプログラムを試すことができます．  
+
+flags:
+  - use-markdown
+#  - no-run
+  - no-validate
+  - no-submit
+
+files:
+  - type: text
+    name: program.py
+    title: プログラム
+    lang: python
+  - type: stdin
+
+run:
+  image: python3
+  limit:
+    time: 10
+    memory: 100mb
+  command: |-2
+    #!/bin/bash
+    cat stdin | python program.py
+

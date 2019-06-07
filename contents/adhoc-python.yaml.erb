@@ -1,0 +1,41 @@
+title: Adhoc Playgroud
+working-dir:  adhoc-python
+flags:
+  - use-markdown
+  - no-save
+  - no-submit
+  <% unless @adhoc['answer'] %>
+  - no-validate
+  <% end %>
+
+files:
+  - type: text
+    name: program-<%= @adhoc['name'] %>.py
+    default: |-2
+      <%= @adhoc['default'] %>
+    answer: |-2
+      <%= @adhoc['answer'] %>
+    title: プログラム
+    lang: python
+
+run:
+  image: python3
+  limit:
+    time: 10
+    memory: 100mb
+  command: |-2
+    #!/bin/bash
+    python program-<%= @adhoc['name'] %>.py
+
+testcases:
+  - title: Test Case 01
+    command: |-2
+      #!/bin/bash
+      echo "<%= @adhoc['answer'] %>" > ans
+      python program-<%= @adhoc['name']%>.py > out
+      c=`diff ans out | wc -c`
+      python -c "print( 100 if $c == 0 else 0 )"
+
+    border: 100/60
+
+

@@ -1,0 +1,60 @@
+title: ACT03
+working-dir: act03
+
+description: |-2
+  ```math
+  A = \left(\begin{array}{cc}
+    2 & 3 \\ 3 & 5
+  \end{array}\right),~~
+  y = \left(\begin{array}{c}
+    1 \\ -1
+  \end{array}\right)
+  ```
+  
+  であるとき，
+  
+  ```math
+  y = Ax
+  ```
+
+  を `$x$` について解く Python プログラムを，Numpy を用いて作成せよ．
+
+deadline: |-2
+  2029/05/31 19:00:00 JST
+
+flags:
+  - use-markdown
+  #- no-run
+  #- no-validate
+  #- no-submit
+
+files:
+  - type: text
+    name: program.py
+    title: プログラム
+    lang: python3
+    default:
+      import numpy as np
+    answer: |-2
+      import numpy as np
+      A = np.array([[2,3],[3.,5]])
+      y = np.array([1,-1])
+      print(np.linalg.solve(A,y))
+
+run:
+  image: python3
+  limit:
+    time: 10
+    memory: 100mb
+  command: |-2
+    #!/bin/bash
+    python program.py
+
+testcases:
+  - title: Test Case 01
+    command: |-2
+      #!/bin/bash
+      python program.py | python -c "print(100 if input().strip()== '[ 8. -5.]' else 0)"
+    border: 100/60
+
+

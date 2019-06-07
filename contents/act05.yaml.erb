@@ -1,0 +1,69 @@
+title: ACT05
+working-dir: act05
+
+description: |-2
+  次の問に答えよ．
+
+deadline: |-2
+  2029/05/31 19:00:00 JST
+
+flags:
+  - use-markdown
+  #-no-save
+  - no-run
+  #- no-validate
+  #- no-submit
+
+files:
+  - type: form
+    name: form1.json
+    title: 問1
+    answer:
+      ans1: 1
+      ans2: 2
+      ans3: 3
+      ans4: 4
+      ans5: 5
+      ans6:
+        - 2
+        - -2
+    default:
+      ans5: 1
+
+    body: |-2
+      **Q1**
+      `$1+0 =$` &nbsp; [[form :text, 'ans1', size: :xsmall]]
+    
+      **Q2**
+      `$1+1 =$` &nbsp; [[form :text, 'ans2', size: :medium]]
+      
+      **Q3**
+      `$1+2 =$` &nbsp; [[form :text, 'ans3', size: :large]]
+      
+      **Q4**
+      `$1+3 =$` &nbsp; [[form :select, 'ans4',
+        options: { '1' => '1', '2' => '2', '3' => '3', '4' => '4' }]]
+
+      **Q5**
+      `$1+4 = ?$` &nbsp;&nbsp;&nbsp;
+      [[form :radiobox, 'ans5', value: 1]] `$1$` &nbsp;
+      [[form :radiobox, 'ans5', value: 2]] `$2$` &nbsp;
+      [[form :radiobox, 'ans5', value: 3]] `$3$` &nbsp;
+      [[form :radiobox, 'ans5', value: 4]] `$4$` &nbsp;
+      [[form :radiobox, 'ans5', value: 5]] `$5$` &nbsp;
+
+      **Q6**
+      `$x^2 = 4,~x = ?$` &nbsp;&nbsp;&nbsp;
+      [[form :checkbox, 'ans6', value: 1]] `$1$` &nbsp;
+      [[form :checkbox, 'ans6', value: 2]] `$2$` &nbsp;
+      [[form :checkbox, 'ans6', value: -1]] `$-1$` &nbsp;
+      [[form :checkbox, 'ans6', value: -2]] `$-2$` &nbsp;
+
+      Note
+      [[form :textarea, 'note', row: 4]]
+
+  - type: text
+    name: form1.txt
+    title: 問2
+   
+

@@ -1,0 +1,27 @@
+title: Ruby Playgroud
+working-dir:  playground-ruby
+description: |-2
+  自由に Ruby のプログラムを試すことができます．  
+
+flags:
+  - use-markdown
+#  - no-run
+  - no-validate
+  - no-submit
+
+files:
+  - type: text
+    name: program.rb
+    title: プログラム
+    lang: ruby
+  - type: stdin
+
+run:
+  image: ruby
+  limit:
+    time: 10
+    memory: 100mb
+  command: |-2
+    #!/bin/bash
+    cat stdin | ruby program.rb
+

@@ -1,0 +1,37 @@
+# <%= @lecture.title %>
+
+<%= @lecture.description %>
+
+## 基本機能
+
+
+
+* コンテンツは Markdown 形式で記述でき，また，MathJax と連携ができます．
+    * [コンテンツ例](<%= content_url('nn') %>)
+    * インライン形式: `$\frac{1}{2}$`
+    * ブロック形式:
+
+```math
+\frac{dx}{dt} = x(1-x)
+```
+
+* 動的なコンテンツを [ERB](https://docs.ruby-lang.org/ja/latest/class/ERB.html) により作成できます．
+
+* プログラムをサンドボックス環境で動作させることができます．
+
+<%= embed_content('/act01', accordion: :none) %>
+
+<%= embed_content('/act05', accordion: :none) %>
+
+<%= embed_content('/act07', accordion: :none) %>
+
+---
+
+# Manual
+
+* [Contents](<%= content_url('/manual/contents/index') %>)
+    * [User](<%= content_url('/manual/contents/user') %>)
+    * [Global Variables](<%= content_url('/manual/contents/global_variables') %>)
+    * [Methods](<%= content_url('/manual/contents/methods') %>)
+
+<%= embed_content('todo') %>
