@@ -2,23 +2,21 @@ title: ACT03
 working-dir: act03
 
 description: |-2
+  
+  <% if @language == 'Japanese' %>
+  次の連立方程式を解く Python のプログラムを Numpy を用いて作成せよ:
+  <% end %>
+  <% if @language == 'English' %>
+  Make a Python program with Numpy that solves the following simultaneous equation:
+  <% end %>
+
+
   ```math
-  A = \left(\begin{array}{cc}
-    2 & 3 \\ 3 & 5
-  \end{array}\right),~~
-  y = \left(\begin{array}{c}
-    1 \\ -1
+  \left\{\begin{array}{rcl}
+    1  &=& 2 x_1 + 3 x_2 \\
+    -1 &=& 3 x_1 + 5 x_2
   \end{array}\right)
   ```
-  
-  であるとき，
-  
-  ```math
-  y = Ax
-  ```
-
-  を `$x$` について解く Python プログラムを，Numpy を用いて作成せよ．
-
 deadline: |-2
   2029/05/31 19:00:00 JST
 
@@ -31,7 +29,7 @@ flags:
 files:
   - type: text
     name: program.py
-    title: プログラム
+    title: Main Program
     lang: python3
     default:
       import numpy as np
