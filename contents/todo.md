@@ -5,8 +5,6 @@
 * ActivityForm で Answer, Default を設定可能にする．
 * administration にまとめている管理機能を適切なページに分配する．
 * 採点補助のための機能を実装する．
-* Page, Activity の`*.erb` という拡張子は廃止し，すべてのファイルで ERB を有効にする．
-  その方がMarkdownエディタでプレビュー機能を活用できて便利．
 * staffロールを廃止するか，権限を見直す．
 * Git の tag があれば，任意の tag の状態にもっていける機能を追加する．
 
