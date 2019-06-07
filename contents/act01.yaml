@@ -1,7 +1,13 @@
-title: アクティビティのデモ1
+title: Hello, Ruby!!
 working-dir: 
 description: |-2
+  <% if @language == 'Japanese' %>
   標準出力に `<%= @user.account %>` と表示する Ruby プログラムを作成せよ．
+  <% end %>
+  <% if @language == 'English' %>
+  Make a Ruby program that autputs `<%= @user.account %>`.
+  <% end %>
+
 
 
 deadline: 2020/05/31 19:00:00 JST
@@ -15,7 +21,7 @@ flags:
 files:
   - type: text
     name: program.rb
-    title: プログラム
+    title: Main Program
     lang: ruby
     default: |-2
     answer: |-2

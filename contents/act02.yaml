@@ -1,8 +1,14 @@
-title: ACT02
+title: Find prime numbers less than N
 working-dir: act02
 description: |-2
+  <% if @language == 'Japanese' %>
   標準入力から正の整数 `$N \le 100$` が与えられる．
   `$N$` までの素数を出力する Ruby プログラムを作成せよ．
+  <% end %>
+  <% if @language == 'English' %>
+  The positive integer number `$N$ < 100` is given from the standard input.
+  Make a Ruby program that outputs prime numbers less than `$N$`.
+  <% end %>
 
 deadline: |-2
   <% if @user.role != :teacher %>2019/04/31 19:00:00 JST<% end %>
@@ -16,7 +22,7 @@ flags:
 files:
   - type: text
     name: program.rb
-    title: プログラム
+    title: Main Program
     lang: ruby
     default: |-2
     answer: |-2
