@@ -3,6 +3,7 @@
 ### TODO
 
 * ActivityForm で Answer, Default を設定可能にする．
+* ユーザーに付与できるタグは meta.yaml で宣言することにする．
 * administration にまとめている管理機能を適切なページに分配する．
 * 採点補助のための機能を実装する．
 * staffロールを廃止するか，権限を見直す．

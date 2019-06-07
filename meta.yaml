@@ -4,6 +4,12 @@ description: |-2
 
   This lecture demonstrates features of LMSX and describes how to use it.
 
+tags:
+  - groupA
+  - groupB
+  - groupC
+  - groupD
+
 global_variables:
 
   language:
