@@ -9,8 +9,3 @@
 <%= embed_content('/act07', accordion: :close) %>
 
 
-<%= embed_content('/adhoc-python', accordion: :none, adhoc: { 'name' => 'foo', 'answer' => 'hello' }) %>
-
-<%= embed_content('/adhoc-python', accordion: :none, adhoc: { 'name' => 'bar', 'answer' => 'world' }) %>
-
-
