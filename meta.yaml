@@ -1,0 +1,15 @@
+title: Demo Lecture
+description: |-2
+  システムのデモ，解説のための講義．
+
+global_variables:
+  week1:
+    description: week1
+    default: 2019/06/03 15:00 JST
+  week2:
+    description: week2
+    default: 2019/06/10 15:00 JST
+  week3:
+    description: week3
+    default: 2019/06/17 15:00 JST
+   
