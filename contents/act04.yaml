@@ -1,8 +1,15 @@
-title: ACT04
+title: Write an article
 working-dir: act04
 
 description: |-2
-  レポートを作成せよ．
+  <% if @language == 'Japanese' %>
+  「運動している物体の電気力学について」というテーマで論文を作成せよ．
+  論文は PDF ファイルとする．
+  <% end %>
+  <% if @language == 'English' %>
+  Write an article on the subject of "Zur Elektrodynamik bewegter Körper".
+  The paper should be create as a PDF file.
+  <% end %>
 
 deadline: |-2
   2029/05/31 19:00:00 JST
@@ -16,7 +23,7 @@ flags:
 files:
   - type: upload
     name: report.pdf
-    title: レポート
+    title: Article
     content-types:
       - application/pdf
 
