@@ -1,15 +1,104 @@
-title: Demo Lecture
+title: Demo
 description: |-2
-  システムのデモ，解説のための講義．
+  This lecture demonstrates features of LMSX and describes how to use it.
 
 global_variables:
+ 
   week1:
-    description: week1
-    default: 2019/06/03 15:00 JST
+    description: The date time of the 1st time lecture
+    default: 2019/04/11 9:45:00 JST
+  week1deadline: 
+    description: The deadline of the 1st time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
   week2:
-    description: week2
-    default: 2019/06/10 15:00 JST
+    description: The date time of the 2nd time lecture
+    default: 2019/04/11 9:45:00 JST
+  week2deadline: 
+    description: The deadline of the 2nd time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
   week3:
-    description: week3
-    default: 2019/06/17 15:00 JST
-   
+    description: The date time of the 3rd time lecture
+    default: 2019/04/11 9:45:00 JST
+  week3deadline: 
+    description: The deadline of the 3rd time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week4:
+    description: The date time of the 4th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week4deadline: 
+    description: The deadline of the 4th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week5:
+    description: The date time of the 5th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week5deadline: 
+    description: The deadline of the 5th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week6:
+    description: The date time of the 6th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week6deadline: 
+    description: The deadline of the 6th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week7:
+    description: The date time of the 7th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week7deadline: 
+    description: The deadline of the 7th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week8:
+    description: The date time of the 8th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week8deadline: 
+    description: The deadline of the 8th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week9:
+    description: The date time of the 9th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week9deadline: 
+    description: The deadline of the 9th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week10:
+    description: The date time of the 10th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week10deadline: 
+    description: The deadline of the 10th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week11:
+    description: The date time of the 11th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week11deadline: 
+    description: The deadline of the 11th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week12:
+    description: The date time of the 12th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week12deadline: 
+    description: The deadline of the 12th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week13:
+    description: The date time of the 13th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week13deadline: 
+    description: The deadline of the 13th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+ 
+  week14:
+    description: The date time of the 14th time lecture
+    default: 2019/04/11 9:45:00 JST
+  week14deadline: 
+    description: The deadline of the 14th time lecture's report
+    default: 2019/04/17 12:00:00 JST
+

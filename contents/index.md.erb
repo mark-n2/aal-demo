@@ -4,34 +4,29 @@
 
 ## 基本機能
 
+* 講義のコンテンツはすべてテキストファイルで作成できます．
+  版管理には Git を使うことを推奨しています．
 
+* 様々な種類の課題を作成することができます．
+  * 任意のタイプのファイルを提出させることが可能です．
+    提出を許可するファイルタイプを指定できます．
+  * プレーンテキスト形式の課題を作成することができます．
+  * HTMLフォームによる課題を作成することができます．
+    選択問題を作成したり，アンケートとしても活用できます．
+  * プログラミング課題を作成することができます．
+  サーバーのサンドボックス環境で実行することができ，その結果をブラウザで即座に確認することができます．
+    さらに，テストケースによる自動検証にも対応しています．
+  * これらを任意に組み合わせた課題を作成することができます．
 
-* コンテンツは Markdown 形式で記述でき，また，MathJax と連携ができます．
-    * [コンテンツ例](<%= content_url('nn') %>)
-    * インライン形式: `$\frac{1}{2}$`
-    * ブロック形式:
-
-```math
-\frac{dx}{dt} = x(1-x)
-```
+  * ページは HTML 形式または Markdown 形式で記述でき，また，標準で MathJax と連携できます．
 
 * 動的なコンテンツを [ERB](https://docs.ruby-lang.org/ja/latest/class/ERB.html) により作成できます．
+  例えば，閲覧中のユーザーの情報を参照して，ユーザー毎に異なる挙動をするようなコンテンツを作成することができます．
 
-* プログラムをサンドボックス環境で動作させることができます．
+* ページには課題やほかのページを埋め込むことができます．
 
-<%= embed_content('/act01', accordion: :none) %>
+# マニュアル
 
-<%= embed_content('/act05', accordion: :none) %>
-
-<%= embed_content('/act07', accordion: :none) %>
-
----
-
-# Manual
-
-* [Contents](<%= content_url('/manual/contents/index') %>)
-    * [User](<%= content_url('/manual/contents/user') %>)
-    * [Global Variables](<%= content_url('/manual/contents/global_variables') %>)
-    * [Methods](<%= content_url('/manual/contents/methods') %>)
+* [Manual](<%= embed_content('/manual') %>)
 
 <%= embed_content('todo') %>
