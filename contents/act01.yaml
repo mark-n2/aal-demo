@@ -5,7 +5,7 @@ description: |-2
   標準出力に `<%= @user.account %>` と表示する Ruby プログラムを作成せよ．
   <% end %>
   <% if @language == 'English' %>
-  Make a Ruby program that autputs `<%= @user.account %>`.
+  Make a Ruby program that outputs `<%= @user.account %>`.
   <% end %>
 
 
