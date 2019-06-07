@@ -1,7 +1,13 @@
-title: ACT07
+title: Draw graphs
 working-dir: 
 
 description: |-2
+  <% if @language == 'Japanese' %>
+  次のプログラムの挙動を確かめよう．
+  <% end %>
+  <% if @language == 'English' %>
+  Cofirm the behavior of the following program.
+  <% end %>
 
 deadline: |-2
   2029/05/31 19:00:00 JST
@@ -15,7 +21,7 @@ flags:
 files:
   - type: text
     name: program.py
-    title: プログラム
+    title: Main Program
     lang: python3
     default: |-2
       import numpy as np

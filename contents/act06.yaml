@@ -1,5 +1,13 @@
-title: アクティビティのデモ6
+title: C-lang
 working-dir: 
+description: |-2
+  <% if @language == 'Japanese' %>
+  自由に C 言語のプログラムを作成できます．
+  <% end %>
+  <% if @language == 'English' %>
+  You can write a C-lang code as you like.
+  <% end %>
+
 
 deadline: 2020/05/31 19:00:00 JST
 
@@ -12,7 +20,7 @@ flags:
 files:
   - type: text
     name: program.c
-    title: プログラム
+    title: Main Program
     lang: clang
   - type: stdin
     default: |-2
