@@ -1,4 +1,4 @@
-title: ACT03
+title: Solve simultaneous equation
 working-dir: act03
 
 description: |-2
@@ -10,12 +10,11 @@ description: |-2
   Make a Python program with Numpy that solves the following simultaneous equation:
   <% end %>
 
-
   ```math
   \left\{\begin{array}{rcl}
     1  &=& 2 x_1 + 3 x_2 \\
     -1 &=& 3 x_1 + 5 x_2
-  \end{array}\right)
+  \end{array}\right.
   ```
 deadline: |-2
   2029/05/31 19:00:00 JST
