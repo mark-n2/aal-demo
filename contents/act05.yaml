@@ -1,8 +1,15 @@
-title: ACT05
+title: Quiz
 working-dir: act05
 
 description: |-2
+  <% if @language == 'Japanese' %>
   次の問に答えよ．
+  <% end %>
+  <% if @language == 'Japanese' %>
+  Answer following questions.
+  <% end %>
+
+
 
 deadline: |-2
   2029/05/31 19:00:00 JST
@@ -17,7 +24,7 @@ flags:
 files:
   - type: form
     name: form1.json
-    title: 問1
+    title: Quiz
     answer:
       ans1: 1
       ans2: 2
@@ -61,9 +68,4 @@ files:
 
       Note
       [[form :textarea, 'note', row: 4]]
-
-  - type: text
-    name: form1.txt
-    title: 問2
-   
 

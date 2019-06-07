@@ -7,7 +7,7 @@ description: |-2
   論文は PDF ファイルとする．
   <% end %>
   <% if @language == 'English' %>
-  Write an article on the subject of "Zur Elektrodynamik bewegter Körper".
+  Write an article on the theme of "Zur Elektrodynamik bewegter Körper".
   The paper should be create as a PDF file.
   <% end %>
 
