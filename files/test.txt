@@ -1,7 +1,0 @@
-total 72
-drwxr-xr-x 6 guest guest   192 May 22 13:36 .
-drwxr-xr-x 1 root  root   4096 May 22 13:36 ..
--rw-r--r-- 1 guest guest 62087 May 16 14:39 NeuralNetwork.png
-drwxr-xr-x 4 guest guest   128 May 16 14:39 dir01
--rw-r--r-- 1 guest guest     7 May 16 14:39 file01.txt
--rw-r--r-- 1 guest guest     0 May 22 13:36 test.txt
