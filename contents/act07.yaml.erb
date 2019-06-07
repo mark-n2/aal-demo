@@ -21,13 +21,24 @@ files:
       import numpy as np
       import matplotlib.pyplot as plt
 
-      x = np.arange(0, 6, 0.1)
-      y = 2 * x
+      t = np.arange(0, 6, 0.01)
+      x = np.cos(2*np.pi*t)
+      y = np.sin(2*np.pi*t)
+
+      fig = plt.figure()
+      plt.plot(t, x)
+      plt.savefig('figure1.png')
+      plt.close()
+
+      fig = plt.figure()
+      plt.plot(t, y)
+      plt.savefig('figure2.png')
+      plt.close()
 
       fig = plt.figure()
       plt.plot(x, y)
-      plt.savefig('figure.png')
-
+      plt.savefig('figure3.png')
+      plt.close()
 
 run:
   image: python3
@@ -37,6 +48,6 @@ run:
   command: |-2
     #!/bin/sh
     python program.py
-    ls -1 *.png *.jpg *.jpeg *.gif 2>/dev/null | awk '{print "show image " $1 " " $1}' > /cmd
+    ls -1 *.png *.jpg *.jpeg *.gif 2>/dev/null | awk '{print "show image " $1}' > /cmd
 
 
