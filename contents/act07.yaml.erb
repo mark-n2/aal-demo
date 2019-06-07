@@ -37,6 +37,6 @@ run:
   command: |-2
     #!/bin/sh
     python program.py
-    ls -1 *.png  2>/dev/null | awk '{print "show image " $1}'
+    ls -1 *.png  2>/dev/null | awk '{print "show image " $1}' > /cmd
 
 
