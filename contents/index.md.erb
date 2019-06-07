@@ -1,8 +1,15 @@
 # <%= @lecture.title %>
 
 <%= @lecture.description %>
+  
+  
+<% if @language == 'Japanese' %>
+  <%= embed_content('/features') %>
+<% end %>
+<% if @language == 'English' %>
+  <%= embed_content('/features.eng') %>
+<% end %>
 
-<%= embed_content('/features') %>
 
 # マニュアル
 
