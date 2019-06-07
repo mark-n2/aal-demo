@@ -3,7 +3,11 @@ description: |-2
   This lecture demonstrates features of LMSX and describes how to use it.
 
 global_variables:
- 
+
+  language:
+    description: Japanese / English
+    default: Japanese
+
   week1:
     description: The date time of the 1st time lecture
     default: 2019/04/11 9:45:00 JST
