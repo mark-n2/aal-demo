@@ -1,0 +1,16 @@
+FROM tensorflow/tensorflow:latest-py3
+
+RUN pip install --upgrade pip && \
+    pip install -q keras && \
+    pip install -q pillow && \
+    pip install -q matplotlib && \
+    pip install -q scikit-image && \
+    pip install -q numpy && \
+    pip install -q h5py && \
+    pip install -q scipy && \
+    pip install -q pandas
+
+RUN adduser guest
+ENV HOME /home/guest
+WORKDIR /home/guest
+USER guest

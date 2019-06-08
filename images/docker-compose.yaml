@@ -1,0 +1,22 @@
+version: '2'
+
+services: 
+
+  ruby:
+    container_name: ruby
+    environment:
+      TZ: Asia/Tokyo
+    build:
+      context: .
+      dockerfile: Dockerfile-ruby
+    mem_limit: 500m
+
+  python3:
+    container_name: python3
+    environment:
+      TZ: Asia/Tokyo
+    build:
+      context: .
+      dockerfile: Dockerfile-python3
+    mem_limit: 500m
+    

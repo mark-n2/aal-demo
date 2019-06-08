@@ -1,0 +1,7 @@
+FROM ruby:2.5
+
+RUN adduser guest
+ENV HOME /home/guest
+WORKDIR /home/guest
+USER guest
+
