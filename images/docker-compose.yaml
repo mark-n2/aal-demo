@@ -19,4 +19,13 @@ services:
       context: .
       dockerfile: Dockerfile-python3
     mem_limit: 500m
-    
+  
+  octave:
+    container_name: octave
+    environment:
+      TZ: Asia/Tokyo
+    build:
+      context: .
+      dockerfile: Dockerfile-octave
+    mem_limit: 500m
+ 

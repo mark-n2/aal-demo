@@ -1,0 +1,15 @@
+FROM mtmiller/octave:6.0.0
+
+ENV TZ Asis/Tokyo 
+
+# Install Ruby
+RUN apt update && apt install -y ruby
+
+RUN octave --version
+RUN echo "pkg install -forge control;" | octave -q
+
+RUN adduser guest
+ENV HOME /home/guest
+WORKDIR /home/guest
+USER guest
+
